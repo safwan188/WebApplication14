@@ -18,7 +18,7 @@ namespace WebApplication14
         {
 
         }
-
+        //register button
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
             Response.Redirect("WebForm1.aspx");

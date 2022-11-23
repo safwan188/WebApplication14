@@ -10,9 +10,10 @@ using System.Data;
 
 namespace WebApplication14
 {
-  
+  // page to insert new patient
     public partial class WebForm1 : System.Web.UI.Page
     {
+        //connecting to DB
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,6 +25,7 @@ namespace WebApplication14
         {
             try
             {
+                //calling stored procedure "in" to insert new Patient
                 SqlCommand cmd = new SqlCommand("in", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Id", SqlDbType.Int).Value = TextBox1.Text;
@@ -37,12 +39,16 @@ namespace WebApplication14
                 cmd.ExecuteNonQuery();
                 con.Close();
                 Label1.Text = "Data has been inserted";
-            } catch (System.Data.SqlClient.SqlException i)
+
+            }
+            //in case of dupliacte id, wrong data type..
+            catch (System.Data.SqlClient.SqlException i)
             {
                 Label1.Text = "make sure id,weight,height are int ";
 
             }
         }
+        //view data button
         protected void LinkButton1_Click1(object sender, EventArgs e)
         {
             Response.Redirect("Patients.aspx");
