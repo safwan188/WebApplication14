@@ -31,6 +31,9 @@ namespace WebApplication14
                 cmd.Parameters.AddWithValue("@Surname", SqlDbType.Int).Value = TextBox3.Text;
                 cmd.Parameters.AddWithValue("@Weight", SqlDbType.Int).Value = TextBox4.Text;
                 cmd.Parameters.AddWithValue("@Height", SqlDbType.Int).Value = TextBox5.Text;
+                float i = (float.Parse(TextBox5.Text) / 100);
+                float j = float.Parse(TextBox4.Text) / (i * i);
+                cmd.Parameters.AddWithValue("@Bmi", SqlDbType.Float).Value = j;
                 cmd.ExecuteNonQuery();
                 con.Close();
                 Label1.Text = "Data has been inserted";
